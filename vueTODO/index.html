@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/vue@next"></script>
+    <title>TodoList</title>
+  </head>
+  <body class="flex justify-center mt-20 p-2 w-full bg-lime-200">
+    <div
+      id="app"
+      class="border-4 border-dotted border-sky-400 p-5 w-64 bg-lime-300 rounded-2xl shadow-lg shadow-sky-300"
+    >
+      <p class="text-lime-700 text-xs">
+        Çift tıklama ile listeyi güncelleyebilirsiniz. <br />Yazıyı 'Enter'
+        tuşuyla listeye ekleyebilirsiniz.
+      </p>
+      <h2
+        class="text-2xl text-lime-700 text-center font-extrabold tracking-widest mb-2"
+      >
+        todo List
+      </h2>
+      <input
+        type="text"
+        v-model="todoItemAdd"
+        @keydown.enter="ekle($event)"
+        class="w-full"
+      />
+      <ul
+        class="text-red-700 uppercase font-bold select-none cursor-copy list-disc"
+      >
+        <li
+          v-for="todo in todoListItems"
+          :key="todo.id"
+          :class="{'line-through text-lime-500' : todo.checked}"
+          @dblclick="todo.checked=!todo.checked; doneList(todo)"
+          class="break-words"
+        >
+          {{todo.text}}
+        </li>
+      </ul>
+      <h2
+        class="text-2xl text-lime-700 text-center font-extrabold tracking-widest mt-4 mb-2"
+      >
+        done List
+      </h2>
+      <ul
+        class="text-lime-600 uppercase font-bold select-none cursor-copy line-through list-disc"
+      >
+        <li
+          v-for="todo in todidListItems"
+          :key="todo.id"
+          @dblclick="todo.checked=!todo.checked; doList(todo)"
+          class="break-words"
+        >
+          {{todo.text}}
+        </li>
+      </ul>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>
